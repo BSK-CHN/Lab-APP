@@ -14,13 +14,14 @@ jobs:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       DEPLOY_REPO_TOKEN: ${{ secrets.DEPLOY_REPO_TOKEN }}
-      IMAGE_NAME: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/lab-app
       IMAGE_TAG: ${{ github.sha }}
     steps:
       - name: Verify required secrets
         run: |
           if [ -z "$DOCKERHUB_USERNAME" ]; then echo "DOCKERHUB_USERNAME is missing"; exit 1; fi
           if [ -z "$DOCKERHUB_TOKEN" ]; then echo "DOCKERHUB_TOKEN is missing"; exit 1; fi
+          export DOCKERHUB_USERNAME_LOWER=$(echo "$DOCKERHUB_USERNAME" | tr '[:upper:]' '[:lower:]')
+          echo "DOCKERHUB_USERNAME_LOWER=$DOCKERHUB_USERNAME_LOWER" >> "$GITHUB_ENV"
           if [ -z "$DEPLOY_REPO_TOKEN" ]; then
             echo "DEPLOY_REPO_TOKEN is missing; continuing with image build only"
           fi
@@ -43,8 +44,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-            ${{ env.IMAGE_NAME }}:latest
+            docker.io/${{ env.DOCKERHUB_USERNAME_LOWER }}/lab-app:${{ env.IMAGE_TAG }}
+            docker.io/${{ env.DOCKERHUB_USERNAME_LOWER }}/lab-app:latest
 
       - name: Update deployment repo manifests
         if: ${{ env.DEPLOY_REPO_TOKEN != '' }}
@@ -56,16 +57,16 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import os
+          import re
           path = Path('k8s/deployment.yaml')
           text = path.read_text()
-          new_image = f"docker.io/{os.environ['DOCKERHUB_USERNAME']}/lab-app:{os.environ['IMAGE_TAG']}"
-          for old in [
-              'image: docker.io/REPLACE_ME/lab-app:latest',
-              'image: lab-app-demo:test',
-          ]:
-              if old in text:
-                  text = text.replace(old, f'image: {new_image}')
-                  break
+          new_image = f"docker.io/{os.environ['DOCKERHUB_USERNAME_LOWER']}/lab-app:{os.environ['IMAGE_TAG']}"
+          # Replace any existing lab-app image reference (handles any tag or username variant)
+          pattern = r'image:\s* docker\.io/[^/]+/lab-app:[^\s]+'
+          if not re.search(pattern, text):
+              # Fallback: try matching plain lab-app image without docker.io prefix
+              pattern = r'image:\s* lab-app:[^\s]+'
+          text = re.sub(pattern, f'image: {new_image}', text)
           path.write_text(text)
           PY
           git add k8s/deployment.yaml
