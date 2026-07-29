@@ -59,7 +59,13 @@ jobs:
           path = Path('k8s/deployment.yaml')
           text = path.read_text()
           new_image = f"docker.io/{os.environ['DOCKERHUB_USERNAME']}/lab-app:{os.environ['IMAGE_TAG']}"
-          text = text.replace('image: docker.io/REPLACE_ME/lab-app:latest', f'image: {new_image}')
+          for old in [
+              'image: docker.io/REPLACE_ME/lab-app:latest',
+              'image: lab-app-demo:test',
+          ]:
+              if old in text:
+                  text = text.replace(old, f'image: {new_image}')
+                  break
           path.write_text(text)
           PY
           git add k8s/deployment.yaml
