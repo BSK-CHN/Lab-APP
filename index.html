@@ -1,41 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Cloud School</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #FFD700;
-        /* CI/CD demo: yellow background */
-        color: #fff;
-      }
-      .card {
-        background: rgba(0, 0, 0, 0.2);
-        padding: 2rem 3rem;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      }
-      h1 {
-        margin-bottom: 0.5rem;
-      }
-      p {
-        margin: 0;
-        font-size: 1.1rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card">
-      <h1>Welcome to Cloud School -Code Change to Production in seconds </h1>
-      <p>This page is deployed through GitHub Actions + Docker Hub + Argo CD </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>The Cloud School | GitOps Demo</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      background: #FFD700;
+      color: #fff;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.78);
+      padding: 55px 70px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+      max-width: 900px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 2.8rem;
+    }
+
+    .highlight {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    p {
+      margin: 10px 0;
+      font-size: 1.15rem;
+    }
+
+    .pipeline {
+      margin-top: 30px;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand {
+      margin-top: 35px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h1>From Code Commit to Production</h1>
+
+    <div class="highlight">
+      ⚡ Automated Deployment in 10–15 Seconds
     </div>
-  </body>
+
+    <p>
+      A GitOps-powered delivery pipeline built with
+      GitHub Actions, Docker Hub, Argo CD and Kubernetes.
+    </p>
+
+    <div class="pipeline">
+      Code Commit → Build → Container Image → GitOps → Kubernetes
+    </div>
+
+    <div class="brand">
+      The Cloud School
+    </div>
+
+  </div>
+
+</body>
 </html>
