@@ -1,86 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>The Cloud School | GitOps Demo</title>
+    <title>The Cloud School | GitOps Demo</title>
 
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
-      background: #FFD700;
-      color: #fff;
-    }
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
 
-    .card {
-      background: rgba(0, 0, 0, 0.78);
-      padding: 55px 70px;
-      border-radius: 18px;
-      text-align: center;
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
-      max-width: 900px;
-    }
+        /* GitOps demo: change this from gold → green */
+        background: gold;
 
-    h1 {
-      margin: 0 0 18px;
-      font-size: 2.8rem;
-    }
+        color: #ffffff;
+      }
 
-    .highlight {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin: 20px 0;
-    }
+      .card {
+        background: rgba(0, 0, 0, 0.78);
+        padding: 55px 70px;
+        border-radius: 18px;
+        text-align: center;
+        max-width: 900px;
 
-    p {
-      margin: 10px 0;
-      font-size: 1.15rem;
-    }
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.35);
+      }
 
-    .pipeline {
-      margin-top: 30px;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-    }
+      h1 {
+        margin: 0 0 18px;
+        font-size: 2.8rem;
+        line-height: 1.2;
+      }
 
-    .brand {
-      margin-top: 35px;
-      font-size: 1rem;
-      font-weight: bold;
-    }
-  </style>
-</head>
+      .highlight {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 20px 0;
+      }
 
-<body>
+      p {
+        margin: 12px 0;
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
 
-  <div class="card">
+      .pipeline {
+        margin-top: 30px;
+        padding: 15px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        font-size: 1rem;
+        letter-spacing: 0.4px;
+      }
 
-    <h1>From Code Commit to Production</h1>
+      .brand {
+        margin-top: 35px;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
 
-    <div class="highlight">
-      ⚡ Automated Deployment in 10–15 Seconds
+  <body>
+
+    <div class="card">
+
+      <h1>From Code Commit to Production</h1>
+
+      <div class="highlight">
+        ⚡ Automated Deployment in 10–15 Seconds
+      </div>
+
+      <p>
+        A GitOps-powered delivery pipeline built with
+        GitHub Actions, Docker Hub, Argo CD and Kubernetes.
+      </p>
+
+      <div class="pipeline">
+        Code Commit
+        →
+        Build
+        →
+        Container Image
+        →
+        GitOps
+        →
+        Kubernetes
+      </div>
+
+      <div class="brand">
+        THE CLOUD SCHOOL
+      </div>
+
     </div>
 
-    <p>
-      A GitOps-powered delivery pipeline built with
-      GitHub Actions, Docker Hub, Argo CD and Kubernetes.
-    </p>
-
-    <div class="pipeline">
-      Code Commit → Build → Container Image → GitOps → Kubernetes
-    </div>
-
-    <div class="brand">
-      The Cloud School
-    </div>
-
-  </div>
-
-</body>
+  </body>
 </html>
